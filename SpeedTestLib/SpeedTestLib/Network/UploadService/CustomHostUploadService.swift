@@ -63,12 +63,14 @@ extension CustomHostUploadService: URLSessionTaskDelegate {
     
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         DispatchQueue.main.async {
+            guard error != nil else { return }
             self.final(.error(NetworkError.requestFailed))
         }
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         DispatchQueue.main.async {
+            guard error != nil else { return }
             self.final(.error(NetworkError.requestFailed))
         }
     }
